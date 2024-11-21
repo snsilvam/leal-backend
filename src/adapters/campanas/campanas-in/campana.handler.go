@@ -47,6 +47,7 @@ func (h *CampanaHandler) CreateCampana(c *gin.Context) {
 		ComprasRegistradas: 0,
 		FechaInicio:        createCampanaDTO.FechaInicio,
 		FechaFin:           createCampanaDTO.FechaFin,
+		Estado:             createCampanaDTO.Estado,
 	}
 
 	err := h.service.CreateCampana(c, &campanaEntity)

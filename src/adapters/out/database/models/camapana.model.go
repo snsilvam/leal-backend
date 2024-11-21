@@ -10,4 +10,5 @@ type Campana struct {
 	ComprasRegistradas int32
 	FechaInicio        time.Time
 	FechaFin           time.Time
+	Estado             bool `gorm:"not null"`
 }

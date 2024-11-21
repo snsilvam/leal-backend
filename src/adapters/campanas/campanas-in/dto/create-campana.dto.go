@@ -8,4 +8,5 @@ type CreateCampanaDTO struct {
 	TipoBeneficioID int16     `json:"tipoBeneficioID" validate:"required"`
 	FechaInicio     time.Time `json:"fechaInicio" validate:"required"`
 	FechaFin        time.Time `json:"fechaFin" validate:"required,gtfield=FechaInicio"`
+	Estado          bool      `json:"estado" validate:"required"`
 }
