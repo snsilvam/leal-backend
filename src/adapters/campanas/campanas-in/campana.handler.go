@@ -41,7 +41,7 @@ func (h *CampanaHandler) CreateCampana(c *gin.Context) {
 	}
 
 	campanaEntity := entity.Campana{
-		SucursarID:         createCampanaDTO.SucursarID,
+		SucursalID:         createCampanaDTO.SucursalID,
 		ComercioID:         createCampanaDTO.ComercioID,
 		TipoBeneficioID:    createCampanaDTO.TipoBeneficioID,
 		ComprasRegistradas: 0,

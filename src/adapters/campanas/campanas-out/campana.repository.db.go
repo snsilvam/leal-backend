@@ -2,9 +2,9 @@ package campanaPostgresql
 
 import (
 	"context"
-	"fmt"
 	"leal-backend/src/adapters/out/database"
 	"leal-backend/src/domain/campanas/entity"
+	"log"
 )
 
 type CampanasPostgresRepository struct {
@@ -18,6 +18,11 @@ func ConstructorCampanasPostgresRepository(database database.Database) *Campanas
 }
 
 func (r *CampanasPostgresRepository) CreateCampana(ctx context.Context, campana *entity.Campana) error {
-	fmt.Println("capa out - Creando la siguiente campaña. . . ", campana)
+	result := r.database.Db.Create(&campana)
+	if result.Error != nil {
+		log.Fatal("no se pudo insertar el registro de la campaña:", result.Error)
+		return result.Error
+	}
+
 	return nil
 }
