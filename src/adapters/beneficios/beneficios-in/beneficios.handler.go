@@ -24,6 +24,13 @@ func (h *BeneficiosHandler) RegisterBeneficiosRoutes(router *gin.Engine) {
 	}
 }
 
+// @Summary Obtiene todos los tipos de beneficios definidos en el sistema.
+// @Description Devuelve todos los tipos de beneficios definidos en el sistema para crear una campaña.
+// @Tags Tipos de beneficios definidos para las campañas.
+// @Accept json
+// @Produce json
+// @Success 200 {object} TipoBeneficiosDTO "Beneficios registrados."
+// @Router /beneficios [get]
 func (h *BeneficiosHandler) GetAllBeneficios(c *gin.Context) {
 	beneficios, err := h.serviceBeneficiosHandler.GetAllBeneficios(c)
 	if err != nil {

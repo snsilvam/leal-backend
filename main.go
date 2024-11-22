@@ -26,10 +26,23 @@ import (
 	comercioout "leal-backend/src/adapters/comercio/comercio-out"
 	comercio "leal-backend/src/domain/comercios/service"
 
+	_ "leal-backend/docs"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+
+	_ "leal-backend/docs"
+
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title Prueba tecnica - Leal Backend Go
+// @version 1.0
+// @description Este es un proyecto con arquitectura hexagonal que permite realizar y si aplica acumular puntos para un usuario.
+
+// @host localhost:3000
+// @BasePath /
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -84,5 +97,7 @@ func main() {
 			"message": "Hello, World!. Welcome to leal api♥",
 		})
 	})
+
+	server.Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	server.StartServer()
 }

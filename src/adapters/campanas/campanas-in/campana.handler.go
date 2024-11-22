@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,6 +31,14 @@ func (h *CampanaHandler) RegisterCampanasRoutes(router *gin.Engine) {
 	}
 }
 
+// @Summary Crea una camapaña, para un comercio y sucursal.
+// @Description Crea una campaña, relacionada a una sucursal y a una campaña, con algun tipo de los beneficios definidos en el sistema.
+// @Tags Campañas
+// @Param campana body CampanaDTO true "Datos de la campaña."
+// @Accept json
+// @Produce json
+// @Success 200
+// @Router /campanas [post]
 func (h *CampanaHandler) CreateCampana(c *gin.Context) {
 	fmt.Println("campaña recibida. . . ")
 	var createCampanaDTO in.CreateCampanaDTO
@@ -63,6 +72,13 @@ func (h *CampanaHandler) CreateCampana(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, "Campaña almacenada en la base de datos.")
 }
 
+// @Summary Consultar camapañas de un comercio y sucursal.
+// @Description Consulta todas las campañas relacionadas a un comercio y una sucursal, por mediod el id de cada uno.
+// @Tags Campañas
+// @Accept json
+// @Produce json
+// @Success 200 {object} CampanaDTO "Información de las campañas registradas."
+// @Router /campanas/:comercioID/:sucursalID [get]
 func (h *CampanaHandler) GetAllCampanas(c *gin.Context) {
 	comercioId := c.Param("comercioID")
 	comercioID, err := strconv.Atoi(comercioId)
@@ -91,4 +107,14 @@ func (h *CampanaHandler) GetAllCampanas(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, campanas)
+}
+
+// Objeto para mostrar en los models del swagger.
+type CampanaDTO struct {
+	SucursalID      int16     `json:"sucursalID" validate:"required"`
+	ComercioID      int16     `json:"comercioID" validate:"required"`
+	TipoBeneficioID int16     `json:"tipoBeneficioID" validate:"required"`
+	FechaInicio     time.Time `json:"fechaInicio" validate:"required"`
+	FechaFin        time.Time `json:"fechaFin" validate:"required,gtfield=FechaInicio"`
+	Estado          bool      `json:"estado" validate:"required"`
 }

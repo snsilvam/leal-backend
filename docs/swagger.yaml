@@ -1,0 +1,189 @@
+basePath: /
+definitions:
+  beneficioshandler.TipoBeneficiosDTO:
+    properties:
+      descripcion:
+        type: string
+      id:
+        type: integer
+      nombre:
+        type: string
+      tipoPuntos:
+        type: string
+    type: object
+  campanaIn.CampanaDTO:
+    properties:
+      comercioID:
+        type: integer
+      estado:
+        type: boolean
+      fechaFin:
+        type: string
+      fechaInicio:
+        type: string
+      sucursalID:
+        type: integer
+      tipoBeneficioID:
+        type: integer
+    required:
+    - comercioID
+    - estado
+    - fechaFin
+    - fechaInicio
+    - sucursalID
+    - tipoBeneficioID
+    type: object
+  comercioin.Comercio:
+    properties:
+      ID:
+        type: integer
+      NombreComercio:
+        type: string
+    type: object
+  compraIn.CreateCompraDTO:
+    properties:
+      ValorCompra:
+        type: number
+      campanaID:
+        type: integer
+      comercioID:
+        type: integer
+      sucursalID:
+        type: integer
+      usuarioID:
+        type: integer
+    required:
+    - ValorCompra
+    - comercioID
+    - sucursalID
+    - usuarioID
+    type: object
+  sucursaleshandler.SucursalesDTO:
+    properties:
+      comercioID:
+        type: integer
+      comprasRegistradas:
+        type: integer
+      id:
+        type: integer
+      ubicacion:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: Este es un proyecto con arquitectura hexagonal que permite realizar
+    y si aplica acumular puntos para un usuario.
+  title: Prueba tecnica - Leal Backend Go
+  version: "1.0"
+paths:
+  /beneficios:
+    get:
+      consumes:
+      - application/json
+      description: Devuelve todos los tipos de beneficios definidos en el sistema
+        para crear una campaña.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Beneficios registrados.
+          schema:
+            $ref: '#/definitions/beneficioshandler.TipoBeneficiosDTO'
+      summary: Obtiene todos los tipos de beneficios definidos en el sistema.
+      tags:
+      - Tipos de beneficios definidos para las campañas.
+  /campanas:
+    post:
+      consumes:
+      - application/json
+      description: Crea una campaña, relacionada a una sucursal y a una campaña, con
+        algun tipo de los beneficios definidos en el sistema.
+      parameters:
+      - description: Datos de la campaña.
+        in: body
+        name: campana
+        required: true
+        schema:
+          $ref: '#/definitions/campanaIn.CampanaDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Crea una camapaña, para un comercio y sucursal.
+      tags:
+      - Campañas
+  /campanas/:comercioID/:sucursalID:
+    get:
+      consumes:
+      - application/json
+      description: Consulta todas las campañas relacionadas a un comercio y una sucursal,
+        por mediod el id de cada uno.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Información de las campañas registradas.
+          schema:
+            $ref: '#/definitions/campanaIn.CampanaDTO'
+      summary: Consultar camapañas de un comercio y sucursal.
+      tags:
+      - Campañas
+  /comercios:
+    get:
+      consumes:
+      - application/json
+      description: Consultar los comercios disponibles, para crear una sucursal o
+        una campaña.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Información del beneficio
+          schema:
+            $ref: '#/definitions/comercioin.Comercio'
+      summary: Consultar los comercios disponibles.
+      tags:
+      - Comercio
+  /compras:
+    post:
+      consumes:
+      - application/json
+      description: Crea una compra en una sucursal/comercio y si tiene activa una
+        campaña, dispara la acumulacion de puntos leal o cashback.
+      parameters:
+      - description: Datos para realizar una compra.
+        in: body
+        name: compra
+        required: true
+        schema:
+          $ref: '#/definitions/compraIn.CreateCompraDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Crea una compra :D
+      tags:
+      - Compras
+  /sucursales/:comercioId:
+    get:
+      consumes:
+      - application/json
+      description: Consultar todas las sucursales relacionadas a un comercio.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Sucursales registradas para un comercio.
+          schema:
+            $ref: '#/definitions/sucursaleshandler.SucursalesDTO'
+      summary: Consultar las sucursales de un comercio.
+      tags:
+      - Sucursales
+swagger: "2.0"

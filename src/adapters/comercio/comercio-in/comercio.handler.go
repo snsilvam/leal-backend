@@ -20,11 +20,18 @@ func ConstructorComercioHandler(service *comercioService.ComercioService) *Comer
 func (h *ComercioHandler) RegisterComercioRoutes(router *gin.Engine) {
 	comercioRoutes := router.Group("/comercios")
 	{
-		comercioRoutes.GET("", h.GetAllGastos)
+		comercioRoutes.GET("", h.GetAllComercios)
 	}
 }
 
-func (h *ComercioHandler) GetAllGastos(c *gin.Context) {
+// @Summary Consultar los comercios disponibles.
+// @Description Consultar los comercios disponibles, para crear una sucursal o una campaña.
+// @Tags Comercio
+// @Accept json
+// @Produce json
+// @Success 200 {object} Comercio "Información del beneficio"
+// @Router /comercios [get]
+func (h *ComercioHandler) GetAllComercios(c *gin.Context) {
 	comercios, err := h.service.GetAllComercios(c)
 	if err != nil {
 		c.JSON(500, gin.H{

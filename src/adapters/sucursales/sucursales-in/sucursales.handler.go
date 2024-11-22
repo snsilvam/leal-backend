@@ -25,6 +25,13 @@ func (h *SucursalesHandler) RegisterSucursalesRoutes(router *gin.Engine) {
 	}
 }
 
+// @Summary Consultar las sucursales de un comercio.
+// @Description Consultar todas las sucursales relacionadas a un comercio.
+// @Tags Sucursales
+// @Accept json
+// @Produce json
+// @Success 200 {object} SucursalesDTO "Sucursales registradas para un comercio."
+// @Router /sucursales/:comercioId [get]
 func (h *SucursalesHandler) GetAllSucursales(c *gin.Context) {
 	comercioId := c.Param("comercioId")
 	intID, err := strconv.Atoi(comercioId)

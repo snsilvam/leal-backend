@@ -26,6 +26,14 @@ func (h *CompraHandler) RegisterComprasRoutes(router *gin.Engine) {
 	}
 }
 
+// @Summary Crea una compra :D
+// @Description Crea una compra en una sucursal/comercio y si tiene activa una campaña, dispara la acumulacion de puntos leal o cashback.
+// @Accept json
+// @Tags Compras
+// @Param compra body CreateCompraDTO true "Datos para realizar una compra."
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /compras [post]
 func (h *CompraHandler) CreateCompra(c *gin.Context) {
 	var createCompraDTO CreateCompraDTO
 	if err := c.BindJSON(&createCompraDTO); err != nil {
