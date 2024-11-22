@@ -1,5 +1,8 @@
 # Leal Backend
 
+# Modelo Entidad Relacion
+![Texto alternativo](images/MER.PNG  "Texto emergente opcional")
+
 # Como inicializar el proyecto
 1. Crea una base de datos en postgresql con el nombre leal.
 2. Configura tu archivo .env definiendo el puerto en el que va escuchas el servidor y el dns de conexion a la base de datos.
