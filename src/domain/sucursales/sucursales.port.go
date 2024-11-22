@@ -5,5 +5,5 @@ import (
 )
 
 type SucursalesRepository interface {
-	GetAllSucursales(ctx context.Context) ([]*Sucursales, error)
+	GetAllSucursales(ctx context.Context, comercioId int16) ([]*Sucursales, error)
 }

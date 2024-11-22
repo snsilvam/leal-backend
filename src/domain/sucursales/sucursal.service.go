@@ -12,6 +12,6 @@ func ConstructorSucursalesService(repository SucursalesRepository) *SucursalesSe
 	}
 }
 
-func (s *SucursalesService) GetAllSucursales(context context.Context) ([]*Sucursales, error) {
-	return s.repositorySucursales.GetAllSucursales(context)
+func (s *SucursalesService) GetAllSucursales(context context.Context, comercioId int16) ([]*Sucursales, error) {
+	return s.repositorySucursales.GetAllSucursales(context, comercioId)
 }

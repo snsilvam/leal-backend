@@ -6,15 +6,21 @@ import (
 	"net/http"
 	"os"
 
+	beneficioshandler "leal-backend/src/adapters/beneficios/beneficios-in"
+	beneficiosdatabase "leal-backend/src/adapters/beneficios/beneficios-out"
 	compraIn "leal-backend/src/adapters/compras/compras-in"
 	comprasout "leal-backend/src/adapters/compras/compras-out"
 	lealHttp "leal-backend/src/adapters/in/http"
 	"leal-backend/src/adapters/out/database"
+	sucursaleshandler "leal-backend/src/adapters/sucursales/sucursales-in"
+	sucursalesdatabase "leal-backend/src/adapters/sucursales/sucursales-out"
 
 	campanaIn "leal-backend/src/adapters/campanas/campanas-in"
 	campanasDatabase "leal-backend/src/adapters/campanas/campanas-out"
 	"leal-backend/src/domain/campanas/service"
 	"leal-backend/src/domain/compras"
+	"leal-backend/src/domain/sucursales"
+	beneficios "leal-backend/src/domain/tipo-beneficios"
 
 	comercioin "leal-backend/src/adapters/comercio/comercio-in"
 	comercioout "leal-backend/src/adapters/comercio/comercio-out"
@@ -60,6 +66,18 @@ func main() {
 	comprasService := compras.ConstructorCompraService(comprasRepository)
 	comprasHandler := compraIn.ConstructorCompraHandler(comprasService)
 	comprasHandler.RegisterComprasRoutes(server.Router)
+
+	// Modulo Sucursales
+	sucursalesRepository := sucursalesdatabase.ConstructorSucursalesPostgresRepository(*database)
+	sucursalesService := sucursales.ConstructorSucursalesService(sucursalesRepository)
+	sucursalesHandler := sucursaleshandler.ConstructorSucursalesHandler(sucursalesService)
+	sucursalesHandler.RegisterSucursalesRoutes(server.Router)
+
+	// Module tipo de Beneficios para las campañas.
+	beneficioRepository := beneficiosdatabase.ConstructorBeneficiosPostgresRepository(*database)
+	beneficioService := beneficios.ConstructorBeneficioService(beneficioRepository)
+	beneficioHandler := beneficioshandler.ConstructorBeneficiosHandler(beneficioService)
+	beneficioHandler.RegisterBeneficiosRoutes(server.Router)
 
 	server.Router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{

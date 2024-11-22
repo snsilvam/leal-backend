@@ -19,7 +19,7 @@ func ConstructorDatabase(dsn string) (*Database, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&models.Comercio{}, &models.TipoBeneficios{}, &models.Sucursal{}, &models.Campana{}, &models.Usuario{}, &models.PuntosLeal{}, &models.Compras{}, &models.Ventas{})
+	err = db.AutoMigrate(&models.Comercio{}, &models.TipoBeneficios{}, &models.Sucursales{}, &models.Campana{}, &models.Usuario{}, &models.PuntosLeal{}, &models.Compras{}, &models.Ventas{})
 	if err != nil {
 		return nil, err
 	}

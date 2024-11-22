@@ -1,6 +1,6 @@
 package models
 
-type Sucursal struct {
+type Sucursales struct {
 	ID                 uint  `gorm:"primaryKey"`
 	ComercioID         int16 `gorm:"not null"`
 	ComprasRegistradas int32
