@@ -18,6 +18,9 @@
 9. Utiliza el endpoint para crear una compra y con esto sumar puntos si aplica.
 10. Si necesitas ver las sucursales, comercios y tipo de beneficios creados en la base de datos usa los endpoints relacionado a cada entidad.
 
+# Swagger documentación de los endpoints
+![Texto alternativo](images/Swagger.PNG  "Doc endpoints")
+
 # Getting Started
 ### Prerequisites
 - Go 1.22 (debería seguir siendo compatible con versiones anteriores)
