@@ -24,7 +24,7 @@
 # Empezando
 ### Requisitos previos
 - Go 1.22 (debería seguir siendo compatible con versiones anteriores)
-- Ver mi video de Youtube para entender el loC <a HREF="https://www.youtube.com/watch?v=DKS--Wnxd1k"> ♥ </a>
+- Ver mi video de Youtube para entender el loC <a HREF="https://www.youtube.com/watch?v=DKS--Wnxd1k"> Delen like ♥ </a>
 
 # Herramientas usadas
 1. <a HREF="https://github.com/gin-gonic/gin">Gin para manejar la capa de adaptadores entrantes. </a>
