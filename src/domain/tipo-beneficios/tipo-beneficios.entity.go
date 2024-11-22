@@ -1,4 +1,4 @@
-package domain
+package beneficios
 
 type TipoBeneficios struct {
 	ID          int16

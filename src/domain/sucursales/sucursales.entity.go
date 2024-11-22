@@ -1,4 +1,4 @@
-package domain
+package sucursales
 
 type Sucursales struct {
 	ID                 int16
