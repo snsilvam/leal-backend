@@ -26,3 +26,13 @@ func (r *CampanasPostgresRepository) CreateCampana(ctx context.Context, campana 
 
 	return nil
 }
+
+func (r *CampanasPostgresRepository) GetAllCampanasOfComercioAndSucursal(ctx context.Context, comercioID int16, sucursalID int16) ([]*entity.Campana, error) {
+	var allSucursales []*entity.Campana
+
+	if err := r.database.Db.Where("comercio_id = ? AND sucursal_id = ?", comercioID, sucursalID).Find(&allSucursales).Error; err != nil {
+		return nil, err
+	}
+
+	return allSucursales, nil
+}

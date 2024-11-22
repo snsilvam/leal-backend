@@ -7,6 +7,7 @@ import (
 	"leal-backend/src/domain/campanas/service"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,6 +26,7 @@ func (h *CampanaHandler) RegisterCampanasRoutes(router *gin.Engine) {
 	campanasRoutes := router.Group("/campanas")
 	{
 		campanasRoutes.POST("", h.CreateCampana)
+		campanasRoutes.GET("/:comercioID/:sucursalID", h.GetAllCampanas)
 	}
 }
 
@@ -59,4 +61,34 @@ func (h *CampanaHandler) CreateCampana(c *gin.Context) {
 	}
 
 	c.IndentedJSON(http.StatusOK, "Campaña almacenada en la base de datos.")
+}
+
+func (h *CampanaHandler) GetAllCampanas(c *gin.Context) {
+	comercioId := c.Param("comercioID")
+	comercioID, err := strconv.Atoi(comercioId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "ComercioID debe ser un entero.",
+		})
+		return
+	}
+
+	sucursalId := c.Param("sucursalID")
+	sucursalID, err := strconv.Atoi(sucursalId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "SucursalID debe ser un entero.",
+		})
+		return
+	}
+
+	campanas, err := h.service.GetAllCampanasOfComercioAndSucursal(c, int16(comercioID), int16(sucursalID))
+	if err != nil {
+		c.JSON(500, gin.H{
+			"error-message": "Error consultando las campañas.",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, campanas)
 }
