@@ -20,6 +20,6 @@ func (s *CampanaService) CreateCampana(ctx context.Context, campana *entity.Camp
 	return s.campanaRepository.CreateCampana(ctx, campana)
 }
 
-/* func (s *CampanaService) GetAllCampanas(comercioID int16, sucursalID int16) ([]*entity.Campana, error) {
-	return s.campanaRepository.GetAllCampanas(comercioID, sucursalID)
-} */
+func (s *CampanaService) GetAllCampanasOfComercioAndSucursal(ctx context.Context, comercioID int16, sucursalID int16) ([]*entity.Campana, error) {
+	return s.campanaRepository.GetAllCampanasOfComercioAndSucursal(ctx, comercioID, sucursalID)
+}
