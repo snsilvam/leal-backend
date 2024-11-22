@@ -1,6 +1,8 @@
 package compras
 
-import "context"
+import (
+	"context"
+)
 
 type CompraService struct {
 	compraRepository ComprasRepository
@@ -24,6 +26,10 @@ func (s *CompraService) AddPuntosTipoBeneficio2(context context.Context, compra 
 	return s.compraRepository.AddPuntosTipoBeneficio2(context, compra)
 }
 
-func (s *CompraService) ComercioConCampanaActiva(context context.Context, compra *Compras) (bool error) {
-	return s.compraRepository.ComercioConCampanaActiva(context, compra)
+func (s *CompraService) CampanaActiva(ctx context.Context, idCampana int16) (int16, error) {
+	return s.compraRepository.CampanaActiva(ctx, idCampana)
+}
+
+func (s *CompraService) DeterminarQueTipoDeBeneficioEstaActivo(context context.Context, beneficioID int16, compra *Compras) error {
+	return s.compraRepository.DeterminarQueTipoDeBeneficioEstaActivo(context, beneficioID, compra)
 }

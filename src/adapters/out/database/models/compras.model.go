@@ -11,5 +11,5 @@ type Compras struct {
 	PuntosLealGanados     int16
 	PuntosCashbackGanados int16
 	FechaCompra           time.Time
-	ValorCompra           int16
+	ValorCompra           float64
 }

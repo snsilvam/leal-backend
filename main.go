@@ -6,12 +6,15 @@ import (
 	"net/http"
 	"os"
 
+	compraIn "leal-backend/src/adapters/compras/compras-in"
+	comprasout "leal-backend/src/adapters/compras/compras-out"
 	lealHttp "leal-backend/src/adapters/in/http"
 	"leal-backend/src/adapters/out/database"
 
 	campanaIn "leal-backend/src/adapters/campanas/campanas-in"
 	campanasDatabase "leal-backend/src/adapters/campanas/campanas-out"
 	"leal-backend/src/domain/campanas/service"
+	"leal-backend/src/domain/compras"
 
 	comercioin "leal-backend/src/adapters/comercio/comercio-in"
 	comercioout "leal-backend/src/adapters/comercio/comercio-out"
@@ -51,6 +54,12 @@ func main() {
 	comercioService := comercio.ConstructorComercioService(comercioRepository)
 	comercioHandler := comercioin.ConstructorComercioHandler(comercioService)
 	comercioHandler.RegisterComercioRoutes(server.Router)
+
+	// Modulo Compras.
+	comprasRepository := comprasout.ConstructorComprasPostgresRepository(*database)
+	comprasService := compras.ConstructorCompraService(comprasRepository)
+	comprasHandler := compraIn.ConstructorCompraHandler(comprasService)
+	comprasHandler.RegisterComprasRoutes(server.Router)
 
 	server.Router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
