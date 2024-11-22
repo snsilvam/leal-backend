@@ -1,7 +1,10 @@
 # Leal Backend
 
 # Modelo Entidad Relacion
-![Texto alternativo](images/MER.PNG  "Texto emergente opcional")
+![Texto alternativo](images/MER.PNG  "MER")
+
+# Arquitectura utilizada
+![Texto alternativo](images/Arquitectura.PNG  "Arquitectura hexagonal♥")
 
 # Como inicializar el proyecto
 1. Crea una base de datos en postgresql con el nombre leal.
@@ -14,6 +17,9 @@
 8. Utiliza el endpoint para consultar las campañas de un comercio y una sucursal.
 9. Utiliza el endpoint para crear una compra y con esto sumar puntos si aplica.
 10. Si necesitas ver las sucursales, comercios y tipo de beneficios creados en la base de datos usa los endpoints relacionado a cada entidad.
+
+# Swagger documentación de los endpoints
+![Texto alternativo](images/Swagger.PNG  "Doc endpoints")
 
 # Getting Started
 ### Prerequisites
