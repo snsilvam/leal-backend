@@ -1,7 +1,10 @@
 # Leal Backend
 
 # Modelo Entidad Relacion
-![Texto alternativo](images/MER.PNG  "Texto emergente opcional")
+![Texto alternativo](images/MER.PNG  "MER")
+
+# Arquitectura utilizada
+![Texto alternativo](images/Arquitectura.PNG  "Arquitectura hexagonal♥")
 
 # Como inicializar el proyecto
 1. Crea una base de datos en postgresql con el nombre leal.
